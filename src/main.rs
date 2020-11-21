@@ -29,11 +29,21 @@ fn main() {
     let connection = establish_connection();
 
     use crate::schema::posts;   //::dsl::*;
-    use crate::models::{NewPost, NewPost2, Post};
+    use crate::models::{PostInsert, Post};
 
-    // let new_post = NewPost2 {
+    let id = 12;
+    let post = diesel::update(posts::dsl::posts.find(id))
+        .set(posts::published.eq(false))
+        .get_result::<Post>(&connection)
+        .expect(&format!("Unable to find post {}", id));
+
+    println!("po updejcie {:?}", post)
+
+    // let new_post = PostInsert {
     //     title: "dupa blada",
-    //     //body: "body body body",
+    //     body: "body body body",
+    //     published: true,
+    //     counter: 1,
     // };
 
     // // let new_post = NewPost {
@@ -49,16 +59,18 @@ fn main() {
     // println!("Wstawiono coś do bazy danych ... {:?}", aa.id);
 
 
-    let results = posts::dsl::posts
-        //.filter(published.eq(true))
-        .limit(5)
-        .load::<Post>(&connection)
-        .expect("Error loading posts");
 
-    println!("Displaying {} posts", results.len());
-    for post in results {
-        println!("{}", post.title);
-        println!("----------\n");
-        println!("{}", post.body);
-    }
+    // let results = posts::dsl::posts
+    //     //.filter(published.eq(true))
+    //     .limit(20)
+    //     .load::<Post>(&connection)
+    //     .expect("Error loading posts");
+
+    // println!("Displaying {} posts", results.len());
+    // for post in results {
+    //     println!("----------\n");
+    //     println!("{}", post.title);
+    //     println!("{}", post.body);
+    //     println!("----------\n");
+    // }
 }

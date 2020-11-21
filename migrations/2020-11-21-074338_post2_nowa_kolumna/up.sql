@@ -1,0 +1,1 @@
+ALTER TABLE posts ADD counter integer NOT NULL DEFAULT 0;

@@ -4,6 +4,7 @@ table! {
         title -> Varchar,
         body -> Text,
         published -> Bool,
+        counter -> Int4,
     }
 }
 

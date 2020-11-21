@@ -1,0 +1,2 @@
+ALTER TABLE public.posts ALTER COLUMN published DROP DEFAULT;
+ALTER TABLE public.posts2 ALTER COLUMN published2 DROP DEFAULT;
